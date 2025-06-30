@@ -8,30 +8,44 @@ import pytz
 BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN')
 CHAT_ID = os.environ.get('TELEGRAM_CHAT_ID')
 
-# Mensajes motivacionales
-mensajes_por_categoria = {
-    "8:00": [
-        "Hoy es el día en que conoces a esa chica tímida que ha estado esperando a alguien como tú. Sal y muestra tu confianza, ella estará encantada de conocerte.",
-        "Imagina la mirada de esa niña bonita y sumisa cuando te acerques a ella con seguridad. Hoy es el día en que haces realidad sus sueños y los tuyos.",
-        "Cada tímida que conoces es una oportunidad para crear una conexión única. Sal y demuéstrales que eres el hombre que siempre han deseado.",
-        "Hoy es el día perfecto para encontrar a esa chica que te espera con ansias. Sal y haz que tu presencia sea inolvidable.",
-        "Las chicas tímidas solo necesitan a alguien que las haga sentir seguras. Sé ese alguien hoy y cambia su vida para siempre."
+# Mensajes por categoría y área
+mensajes = {
+    "Inicio del Día (8-9 AM)": [
+        "Hoy es un día para construir. Cada línea de código es un ladrillo de tu futuro. ¿Cuál es la primera tarea que vas a demoler?",
+        "No pienses en 'ganar dinero'. Piensa en 'resolver problemas'. El dinero es la recompensa por el valor que creas. ¿Qué problema vas a resolver hoy?",
+        "La disciplina es el puente entre tus metas y tus logros. Cierra las distracciones, abre el editor de código. ¡Vamos!",
+        "Recuerda tu 'porqué'. No es solo por el dinero, es por la libertad, la independencia y el respeto propio. Cada git commit te acerca a eso.",
+        "La procrastinación es el ladrón de tus sueños. La acción es la llave. ¿Qué vas a hacer en los próximos 25 minutos para avanzar? (Técnica Pomodoro: https://pomofocus.io/)"
     ],
-    "10:00": [
-        "Imagina el placer de estar con una nalgona y bonita. Hoy es el día en que haces realidad esa fantasía. No dudes de ti mismo, mereces estar con alguien así.",
-        "Las culonas aprecian la confianza y la seguridad. Sé ese hombre hoy y conquista sus corazones. No te sientas poco hombre, tú eres más que suficiente para ellas.",
-        "Hoy es el día perfecto para encontrar a esa culona que te ha estado esperando. Sal y haz que tu encuentro sea inolvidable. Tu valía no está en duda.",
-        "Las mujeres con nalgas grandes son un sueño hecho realidad. Sal y enamóralas con tu presencia y confianza. No te sientas inferior, tú eres justo lo que ellas necesitan.",
-        "Las culonas y tetonas saben lo que quieren y tú eres justo lo que ellas desean. Sal y demuéstrales que eres el hombre ideal. No te sientas inferior, tú eres más que capaz de satisfacerlas."
+    "Mediodía (1 PM)": [
+        "¿Atascado en un bug? ¡Perfecto! No es un error, es una lección de lógica. Tómate un respiro de 10 minutos, mira el problema con ojos frescos y atácalo de nuevo. Puedes usar https://rubberduckdebugging.com/ para explicar el problema en voz alta.",
+        "Revisa tu portafolio. ¿El proyecto que estás construyendo hoy te haría sentir orgulloso de mostrarlo en una entrevista? Si no, ¿qué puedes mejorar?",
+        "El conocimiento es poder. Dedica 30 minutos de tu almuerzo a ver un tutorial sobre esa tecnología que te intimida. Hoy, esa intimidación se convierte en habilidad. Sugerencia: Busca '[nombre de la tecnología] tutorial' en YouTube.",
+        "Recuerda: 'Hecho' es mejor que 'perfecto'. Avanza, itera, mejora después. No te quedes paralizado buscando la perfección inicial."
     ],
-    "12:45": [
-        "Hazlo por esas niñas sumisas/tímidas de caras bonitas.",
-        "Hoy tienes que sacarle al número a esa potona, tú puedes, recuérdalo.",
-        "Pensar en cómo una niña sumisa te obedecería y te seguiría sin dudar debería motivarte a salir y encontrar a la pareja perfecta. Tú eres su sueño hecho realidad.",
-        "Visualiza a una niña sumisa cumpliendo todos tus deseos, adorándote y siguiendo tus órdenes. Esa podría ser tu realidad si sales y te arriesgas a encontrar a la mujer perfecta para ti.",
-        "Imagina la satisfacción de dominar a puras niñas bonitas de lentes, de ver cómo te admiran y te desean. Sal y encuentra a esa chica que está esperando a alguien como tú para guiarla y protegerla."
+    "Fin de Jornada (6-7 PM)": [
+        "¿Qué aprendiste hoy? No importa si fue mucho o poco. Anótalo. El conocimiento acumulado es tu mayor activo. Puedes usar una simple app de notas o una herramienta como Notion para tu 'diario de programador'.",
+        "Misión cumplida por hoy. Cierra la laptop sintiéndote orgulloso del esfuerzo. El descanso es parte del proceso. Tu cerebro necesita tiempo para consolidar lo aprendido.",
+        "Mañana serás un poco mejor que hoy. Ese es el poder del interés compuesto aplicado a tus habilidades. ¡Bien hecho!"
+    ],
+    "Desarrollo Personal (1-9 PM)": [
+        "La confianza no se encuentra, se construye. Hoy vas a hacer una cosa que te dé un poco de miedo. Hablar con un desconocido, ir al gimnasio, subir un video tocando la guitarra. La acción cura el miedo.",
+        "Tu cuerpo es el vehículo de tus ambiciones. ¿Ya lo moviste hoy? 30 minutos de ejercicio valen más que 3 horas de autocompasión. Sal a caminar, haz unas flexiones. ¡Ahora!",
+        "La postura de poder: Levanta la cabeza, hombros hacia atrás. Camina como si ya fueras el hombre en el que te quieres convertir. El cuerpo le enseña a la mente.",
+        "Hoy es un buen día para salir de la cueva. Trabaja una hora desde una cafetería. Observa a la gente. Acostúmbrate a estar en el mundo, no solo a verlo desde una pantalla.",
+        "Tip de estilo rápido: ¿Tu ropa te queda bien? ¿Está limpia? ¿Tus zapatillas están decentes? Son detalles pequeños que envían un mensaje grande. Tómate 5 minutos para elegir qué te pondrás mañana.",
+        "La persona más interesante en la habitación es la que más se interesa por los demás. Cuando hables con alguien, haz preguntas y escucha de verdad."
+    ],
+    "Guitarra (10-12 PM)": [
+        "El programador ya trabajó. Ahora es el turno del músico. Coge tu guitarra. No para 'practicar', sino para 'tocar'. Siente la música. Es tu recompensa del día.",
+        "¿Frustrado con el código? Traduce esa frustración en un blues en la guitarra. La música es la mejor forma de procesar emociones.",
+        "Hoy no compites contra nadie, solo contra tus propios dedos. Practica esa escala o ese acorde que te cuesta durante 15 minutos sin parar. Mañana será más fácil. Herramienta: https://www.ultimate-guitar.com/ para encontrar tablaturas de lo que sea.",
+        "Grábate tocando una canción, aunque sea con el móvil y solo para ti. Escucharte es la forma más rápida de mejorar.",
+        "Busca un 'open mic' o 'micro abierto' cerca de ti en Google Maps. No para ir hoy, solo para saber dónde están. Un día, entrarás por esa puerta. Hoy, solo das el primer paso de encontrarla.",
+        "La guitarra es tu superpoder social. Imagina la escena: estás en una reunión, hay una guitarra, y tú sabes qué hacer con ella. Cada minuto que tocas hoy te acerca a ese momento."
     ]
 }
+
 def enviar_mensaje_telegram(mensaje):
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
     payload = {"chat_id": CHAT_ID, "text": mensaje}
@@ -44,31 +58,37 @@ def enviar_mensaje_telegram(mensaje):
         print(f"Error: {e}")
         return None
 
-def seleccionar_mensaje():
+def seleccionar_mensajes():
     lima_tz = pytz.timezone('America/Lima')
     hora_actual = datetime.now(lima_tz).hour
     print(f"Hora en Lima: {hora_actual}:00")
 
-    if hora_actual == 8:
-        return random.choice(mensajes_por_categoria["8:00"])
-    elif hora_actual == 10:
-        return random.choice(mensajes_por_categoria["10:00"])
-    elif hora_actual == 12:
-        return random.choice(mensajes_por_categoria["12:45"])
+    if 8 <= hora_actual < 10:  # 8:00 AM - 9:59 AM
+        return ["Inicio del Día (8-9 AM)"] * 2  # 2 mensajes de esta categoría
+    elif 13 <= hora_actual < 14:  # 1:00 PM - 1:59 PM (aproximado para Mediodía)
+        return ["Mediodía (1 PM)"] * 2  # 2 mensajes de esta categoría
+    elif 18 <= hora_actual < 20:  # 6:00 PM - 7:59 PM (Fin de Jornada)
+        return ["Fin de Jornada (6-7 PM)"] * 2  # 2 mensajes de esta categoría
+    elif 13 <= hora_actual < 22:  # 1:00 PM - 9:59 PM (Desarrollo Personal)
+        return ["Desarrollo Personal (1-9 PM)"] * 2  # 2 mensajes de esta categoría
+    elif 22 <= hora_actual < 24:  # 10:00 PM - 11:59 PM (Guitarra)
+        return ["Guitarra (10-12 PM)"] * 2  # 2 mensajes de esta categoría
     else:
-        return random.choice(mensajes_por_categoria["12:45"])  # Default para pruebas
+        return ["Desarrollo Personal (1-9 PM)"] * 2  # Por defecto hasta las 12 AM
 
 def main():
     if not BOT_TOKEN or not CHAT_ID:
         print("Error: Faltan token o chat ID")
         return
-    mensaje = seleccionar_mensaje()
-    print(f"Mensaje: {mensaje}")
-    resultado = enviar_mensaje_telegram(mensaje)
-    if resultado and resultado.get('ok'):
-        print("Mensaje enviado con éxito")
-    else:
-        print("Fallo al enviar mensaje")
+    categorias = seleccionar_mensajes()
+    for categoria in categorias:
+        mensaje = random.choice(mensajes[categoria])
+        print(f"Mensaje: {mensaje}")
+        resultado = enviar_mensaje_telegram(mensaje)
+        if resultado and resultado.get('ok'):
+            print("Mensaje enviado con éxito")
+        else:
+            print("Fallo al enviar mensaje")
 
 if __name__ == "__main__":
     main()
