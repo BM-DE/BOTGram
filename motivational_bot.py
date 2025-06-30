@@ -19,8 +19,8 @@ mensajes_por_categoria = {
         "La confianza crece con la acción. ¡Intenta algo nuevo!"
     ],
     "12:45": [
-        "¡Hora de inspirarte! Cada paso te acerca a tus sueños.",
-        "¡Sigue adelante! Tus habilidades sociales se fortalecen."
+        "Hazlo por esas niñas sumisas/timidas de caras bonitas.",
+        "Hoy tienes que sacarle al número a pura potona, tu puedes, recuérdalo."
     ]
 }
 
