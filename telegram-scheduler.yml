@@ -2,10 +2,15 @@ name: Telegram Motivational Bot
 
 on:
   schedule:
-    - cron: '0 13 * * *'  # 8:00 AM Lima (UTC-5)
-    - cron: '0 15 * * *'  # 10:00 AM Lima (UTC-5)
-    - cron: '45 17 * * *' # 12:45 PM Lima (UTC-5)
-  workflow_dispatch:  # Para pruebas manuales
+    - cron: '0 13 * * *'   # 8:00 AM Lima (13:00 UTC)
+    - cron: '0 15 * * *'   # 10:00 AM Lima (15:00 UTC)
+    - cron: '0 18 * * *'   # 1:00 PM Lima (18:00 UTC)
+    - cron: '0 20 * * *'   # 3:00 PM Lima (20:00 UTC)
+    - cron: '0 22 * * *'   # 5:00 PM Lima (22:00 UTC)
+    - cron: '0 0 * * *'    # 7:00 PM Lima (00:00 UTC siguiente día)
+    - cron: '0 2 * * *'    # 9:00 PM Lima (02:00 UTC siguiente día)
+    - cron: '0 4 * * *'    # 11:00 PM Lima (04:00 UTC siguiente día)
+  workflow_dispatch:
 
 jobs:
   send-message:
