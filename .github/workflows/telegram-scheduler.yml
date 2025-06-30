@@ -1,0 +1,35 @@
+name: Telegram Motivational Bot
+
+on:
+  schedule:
+    - cron: '0 13 * * *'  # 8:00 AM Lima (UTC-5)
+    - cron: '0 15 * * *'  # 10:00 AM Lima (UTC-5)
+    - cron: '45 17 * * *' # 12:45 PM Lima (UTC-5)
+  workflow_dispatch:  # Para pruebas manuales
+
+jobs:
+  send-message:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.9'
+    - name: Install dependencies
+      run: pip install requests pytz
+    - name: Check script existence
+      run: |
+        if [ -f "motivational_bot.py" ]; then
+          echo "Script motivational_bot.py found"
+        else
+          echo "Error: motivational_bot.py not found"
+          exit 1
+        fi
+    - name: Send Telegram message
+      env:
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      run: |
+        echo "Starting bot execution"
+        python motivational_bot.py || echo "Script failed with exit code $?"
