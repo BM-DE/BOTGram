@@ -8,15 +8,43 @@ import pytz
 BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN')
 CHAT_ID = os.environ.get('TELEGRAM_CHAT_ID')
 
-# Mensajes por categoría y área (simplificado para prueba)
+# Mensajes por categoría y área (modificados según tu lista)
 mensajes = {
-    "Mañana Temprano (7-9 AM)": ["Mensaje de prueba 1", "Mensaje de prueba 2", "Mensaje de prueba 3"],
-    "Media Mañana (9-11 AM)": ["Mensaje de prueba 4", "Mensaje de prueba 5", "Mensaje de prueba 6"],
-    "Mediodía (11 AM-1 PM)": ["Mensaje de prueba 7", "Mensaje de prueba 8", "Mensaje de prueba 9"],
-    "Tarde (1-5 PM)": ["Mensaje de prueba 10", "Mensaje de prueba 11", "Mensaje de prueba 12"],
-    "Noche Temprana (5-7 PM)": ["Mensaje de prueba 13", "Mensaje de prueba 14", "Mensaje de prueba 15"],
-    "Noche (7-9 PM)": ["Mensaje de prueba 16", "Mensaje de prueba 17", "Mensaje de prueba 18"],
-    "Noche Tardía (9-10 PM)": ["Mensaje de prueba 19", "Mensaje de prueba 20", "Mensaje de prueba 21"]
+    "Mañana Temprano (7-9 AM)": [
+        "¡Buenos días! ☀️ Hoy es una nueva oportunidad para invertir en la persona más importante: TÚ. Cada pequeña elección saludable que hagas es un acto de amor propio.",
+        "Tu cuerpo ha estado en ayunas toda la noche. ¡Regálale un gran vaso de agua para despertar tus órganos y empezar el día con energía! 💧",
+        "No es solo comida, es combustible. Elige un desayuno que te nutra y te prepare para conquistar el día. 🍓🥑"
+    ],
+    "Media Mañana (9-11 AM)": [
+        "¡Esa sonrisa es poderosa! Un buen cepillado por la mañana no solo protege tus dientes, sino que te da frescura y confianza.",
+        "¡Buenos días, piel! Una limpieza e hidratación rápidas la preparan y protegen de todo el día. ¡Es tu escudo de belleza! 🧴",
+        "El sol es vida, pero tu piel necesita protección. ¿Reaplicaste tu protector solar? Es el mejor hábito antiedad que puedes tener. ☀️"
+    ],
+    "Mediodía (11 AM-1 PM)": [
+        "Alto ahí! Es momento de una pausa para beber agua. Tu piel, tu cerebro y tus músculos te lo agradecerán enormemente. 💧",
+        "¿Sientes un poco de hambre? Elige un snack que te sume, no que te reste. Una fruta, un puñado de frutos secos... ¡Energía de la buena! 🍎",
+        "Piensa en tu próxima comida. 🥗 ¿Cómo puedes hacerla deliciosa y súper nutritiva? Planificar es clave para no caer en tentaciones."
+    ],
+    "Tarde (1-5 PM)": [
+        "Tu cabello es tu corona. 👑 Dedícale un minuto: un masaje suave en el cuero cabelludo o desenredarlo con cariño puede hacer una gran diferencia.",
+        "¡Endereza esa espalda! Una buena postura no solo previene dolores, sino que proyecta seguridad y confianza. ¡Hombros atrás y cabeza en alto!",
+        "¿Sientes el bajón de energía? ¡Es la señal perfecta para moverte! 🏃‍♀️ Vence a la pereza y regálate una dosis de vitalidad que durará toda la tarde."
+    ],
+    "Noche Temprana (5-7 PM)": [
+        "No olvides el mejor tu sentido del humor, alista podcast o audios con chistes.",
+        "Mejora tu interacción social siempre que sea posible, eso mejora tus habilidades comunicativas, recuerda que si puedes.",
+        "Recuerda irte a dormir siempre dejándolo todo, la victoria de hoy es la medalla del mañana, tú lo soñaste, recuérdalo siempre."
+    ],
+    "Noche (7-9 PM)": [
+        "El 'tú' de mañana te agradecerá esto: deja lista tu ropa de ejercicio. Es el truco definitivo para no tener excusas. 👟",
+        "La batalla contra las caries se gana por la noche. Un cepillado completo con hilo dental es INNEGOCIABLE. ¡Tus dientes del futuro te lo agradecen!",
+        "Tómate un momento para pensar en el día. ¿Qué hiciste bien por ti hoy? Agradece a tu cuerpo por todo lo que te permite hacer. 🙏"
+    ],
+    "Noche Tardía (9-10 PM)": [
+        "El 'tú' de mañana te agradecerá esto: deja lista tu ropa de ejercicio. Es el truco definitivo para no tener excusas. 👟",
+        "Recuerda: el progreso, no la perfección, es la meta. Cada día que lo intentas, estás ganando. ¡Estás haciendo un trabajo increíble!",
+        "El sueño es la base de todo: repara músculos, consolida la memoria y embellece la piel. Asegúrate de que tu habitación esté oscura y tranquila. ¡A descansar! 😴"
+    ]
 }
 
 def enviar_mensaje_telegram(mensaje):
@@ -51,8 +79,8 @@ def seleccionar_mensajes():
     elif 21 <= hora_actual < 22:
         return ["Noche Tardía (9-10 PM)"] * 3
     else:
-        print(f"Hora fuera de rango ({hora_actual}:00), enviando mensaje de prueba.")
-        return ["Mañana Temprano (7-9 AM)"] * 3  # Mensaje de prueba fuera de rango
+        print(f"Hora fuera de rango ({hora_actual}:00), no se enviarán mensajes.")
+        return []
 
 def main():
     print(f"Token: {BOT_TOKEN[:4]}... (ocultado), Chat ID: {CHAT_ID}")
