@@ -2,14 +2,14 @@ name: Telegram Motivational Bot
 
 on:
   schedule:
-    - cron: '0 13 * * *'   # 8:00 AM Lima (13:00 UTC)
-    - cron: '0 15 * * *'   # 10:00 AM Lima (15:00 UTC)
-    - cron: '0 18 * * *'   # 1:00 PM Lima (18:00 UTC)
-    - cron: '0 20 * * *'   # 3:00 PM Lima (20:00 UTC)
-    - cron: '0 22 * * *'   # 5:00 PM Lima (22:00 UTC)
-    - cron: '0 0 * * *'    # 7:00 PM Lima (00:00 UTC siguiente día)
-    - cron: '0 2 * * *'    # 9:00 PM Lima (02:00 UTC siguiente día)
-    - cron: '0 4 * * *'    # 11:00 PM Lima (04:00 UTC siguiente día)
+    - cron: '0 12 * * *'  # 7:00 AM Lima (12:00 UTC)
+    - cron: '0 14 * * *'  # 9:00 AM Lima (14:00 UTC)
+    - cron: '0 16 * * *'  # 11:00 AM Lima (16:00 UTC)
+    - cron: '0 18 * * *'  # 1:00 PM Lima (18:00 UTC)
+    - cron: '0 20 * * *'  # 3:00 PM Lima (20:00 UTC)
+    - cron: '0 22 * * *'  # 5:00 PM Lima (22:00 UTC)
+    - cron: '0 0 * * *'   # 7:00 PM Lima (00:00 UTC siguiente día)
+    - cron: '0 3 * * *'   # 10:00 PM Lima (03:00 UTC siguiente día)
   workflow_dispatch:
 
 jobs:
@@ -36,5 +36,5 @@ jobs:
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       run: |
-        echo "Starting bot execution"
+        echo "Starting bot execution at $(date -u)"
         python motivational_bot.py || echo "Script failed with exit code $?"
