@@ -36,5 +36,12 @@ jobs:
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       run: |
+        echo "Starting execution at $(date -u)"
+        python motivational_bot.py || {
+          echo "Script failed, exit code: $?"
+          exit 1
+        }
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      run: |
         echo "Starting bot execution at $(date -u)"
         python motivational_bot.py || echo "Script failed with exit code $?"
