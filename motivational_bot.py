@@ -82,8 +82,8 @@ def seleccionar_mensajes():
     elif 21 <= hora_actual < 22:  # 9:00 PM - 9:59 PM
         return ["Noche Tardía (9-10 PM)"] * 3
     else:
-        print(f"Hora fuera de rango ({hora_actual}:00), no se enviarán mensajes.")
-        return []
+    print(f"Hora fuera de rango ({hora_actual}:00), enviando mensaje de prueba.")
+    return ["Mañana Temprano (7-9 AM)"] * 3
 
 def main():
     if not BOT_TOKEN or not CHAT_ID:
